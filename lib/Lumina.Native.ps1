@@ -121,6 +121,9 @@ public class LuminaOverlay : Form
         var bounds = Screen.PrimaryScreen.Bounds;
         this.Bounds = bounds;
         this.DoubleBuffered = true;
+        this.SetStyle(System.Windows.Forms.ControlStyles.AllPaintingInWmPaint 
+                      | System.Windows.Forms.ControlStyles.UserPaint 
+                      | System.Windows.Forms.ControlStyles.OptimizedDoubleBuffer, true);
         this.durationMs = durationMs;
         this.fps = Math.Max(30, Math.Min(240, fps));
         this.fromScaled = ScaleToBounds(fromImg, bounds.Width, bounds.Height);
@@ -149,6 +152,11 @@ public class LuminaOverlay : Form
         g.DrawImage(fromScaled, new Rectangle(0, 0, this.Width, this.Height));
         base.OnPaint(e);
     }
+    
+    protected override void OnPaintBackground(PaintEventArgs e)
+    {
+        // Evita limpiar a negro para prevenir flash antes del primer dibujado
+    }
 
     private static Image ScaleToBounds(Image img, int width, int height)
     {
@@ -164,7 +172,6 @@ public class LuminaOverlay : Form
             g.SmoothingMode = SmoothingMode.None;
             g.PixelOffsetMode = PixelOffsetMode.None;
             g.CompositingQuality = CompositingQuality.HighSpeed;
-            g.Clear(Color.Black);
             g.DrawImage(img, new Rectangle(x, y, dw, dh));
         }
         return bmp;
@@ -184,10 +191,15 @@ public class LuminaOverlay : Form
         }
         using (var fromImg = File.Exists(fromPath) ? Image.FromFile(fromPath) : Image.FromFile(toPath))
         {
-            LuminaWallpaper.Set(finalPath);
             var overlay = new LuminaOverlay(fromImg, durationMs, fps);
+            var handle = overlay.Handle;
+            DesktopWindow.PlaceOverlayBelowIcons(handle);
+            overlay.Opacity = 1.0;
             overlay.Show();
-            DesktopWindow.PlaceOverlayBelowIcons(overlay.Handle);
+            overlay.Invalidate();
+            overlay.Update();
+            Application.DoEvents();
+            LuminaWallpaper.Set(finalPath);
             overlay.sw.Restart();
             int frameTargetMs = Math.Max(2, 1000 / Math.Max(30, Math.Min(240, fps)));
             while (overlay.Opacity > 0.0)

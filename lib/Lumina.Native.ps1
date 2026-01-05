@@ -27,6 +27,8 @@ public static class LuminaWallpaper
 
 public static class DesktopWindow
 {
+    private static IntPtr _cachedHost = IntPtr.Zero;
+    private static bool _initialized = false;
     private delegate bool EnumWindowsProc(IntPtr hWnd, IntPtr lParam);
 
     [DllImport("user32.dll", SetLastError = true)]
@@ -41,16 +43,9 @@ public static class DesktopWindow
     [DllImport("user32.dll", SetLastError = true)]
     private static extern IntPtr SetParent(IntPtr hWndChild, IntPtr hWndNewParent);
 
-    [DllImport("user32.dll", SetLastError = true)]
-    private static extern IntPtr SendMessageTimeout(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam, uint fuFlags, uint uTimeout, out IntPtr lpdwResult);
-
-    private const uint SMTO_NORMAL = 0x0000;
-
     public static IntPtr GetWorkerW()
     {
-        IntPtr progman = FindWindow("Progman", null);
-        IntPtr result;
-        SendMessageTimeout(progman, 0x052C, IntPtr.Zero, IntPtr.Zero, SMTO_NORMAL, 1000, out result);
+        if (_initialized && _cachedHost != IntPtr.Zero) return _cachedHost;
 
         IntPtr workerw = IntPtr.Zero;
         EnumWindows((hWnd, lParam) =>
@@ -63,7 +58,15 @@ public static class DesktopWindow
             return true;
         }, IntPtr.Zero);
 
-        return workerw;
+        // Si no existe WorkerW, usar Progman como fallback sin enviar 0x052C
+        if (workerw == IntPtr.Zero)
+        {
+            workerw = FindWindow("Progman", null);
+        }
+
+        _cachedHost = workerw;
+        _initialized = true;
+        return _cachedHost;
     }
 
     public static bool AttachToDesktop(IntPtr child)
@@ -84,6 +87,21 @@ public static class DesktopWindow
     public static void ToBottom(IntPtr hWnd)
     {
         SetWindowPos(hWnd, HWND_BOTTOM, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER);
+    }
+
+    public static void PlaceOverlayBelowIcons(IntPtr overlay)
+    {
+        IntPtr host = GetWorkerW();
+        if (host == IntPtr.Zero) return;
+        SetParent(overlay, host);
+        // Coloca overlay arriba del fondo dentro del host
+        SetWindowPos(overlay, IntPtr.Zero /* HWND_TOP */, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER);
+        // Asegura que los íconos quedan por encima
+        IntPtr defView = FindWindowEx(host, IntPtr.Zero, "SHELLDLL_DefView", null);
+        if (defView != IntPtr.Zero)
+        {
+            SetWindowPos(defView, overlay, 0, 0, 0, 0, SWP_NOMOVE | SWP_NOSIZE | SWP_NOACTIVATE | SWP_NOOWNERZORDER);
+        }
     }
 }
 
@@ -166,11 +184,10 @@ public class LuminaOverlay : Form
         }
         using (var fromImg = File.Exists(fromPath) ? Image.FromFile(fromPath) : Image.FromFile(toPath))
         {
+            LuminaWallpaper.Set(finalPath);
             var overlay = new LuminaOverlay(fromImg, durationMs, fps);
             overlay.Show();
-            if (DesktopWindow.AttachToDesktop(overlay.Handle)) {
-                DesktopWindow.ToBottom(overlay.Handle);
-            }
+            DesktopWindow.PlaceOverlayBelowIcons(overlay.Handle);
             overlay.sw.Restart();
             int frameTargetMs = Math.Max(2, 1000 / Math.Max(30, Math.Min(240, fps)));
             while (overlay.Opacity > 0.0)
@@ -185,7 +202,7 @@ public class LuminaOverlay : Form
             overlay.Hide();
             overlay.Close();
         }
-        LuminaWallpaper.Set(finalPath);
+        return;
     }
 }
 "@

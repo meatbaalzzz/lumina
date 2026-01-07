@@ -7,9 +7,6 @@
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
 
-#  **Cycling Wallpaper Program**
-
-
 <br>
 
 **Lumina** es una herramienta estética para Windows diseñada para elevar tu experiencia de escritorio. Combina un **difuminado adaptativo** inteligente con un **ciclado de fondos de pantalla** fluido, transformando tu entorno de trabajo en un espacio dinámico y visualmente agradable.

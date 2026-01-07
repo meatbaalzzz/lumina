@@ -46,6 +46,9 @@ Sigue estos sencillos pasos para poner en marcha Lumina:
     - Navega a la carpeta `wallpapers` dentro del directorio del proyecto.
     - Añade tus imágenes favoritas en formato `.png`.
     - Lumina las detectará automáticamente.
+
+> **Nota:** Los nombres de los fondos de pantalla deben de seguir una jerarquía númerica de menor a mayor, donde el menor será el primero en mostrarse en el carrusel y el mayor el último en mostrarse. E. g. 1.png -> Primer wallpaper
+
 3.  **Inicia Lumina**:
     - Ejecuta el archivo `lumina.vbs`.
     - ¡Listo! Lumina comenzará a gestionar tu fondo de pantalla silenciosamente en segundo plano.

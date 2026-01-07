@@ -6,9 +6,9 @@
 ![PowerShell](https://img.shields.io/badge/Made%20with-PowerShell-5391FE?style=for-the-badge&logo=powershell)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
 
-<div>
+
 #  **Cycling Wallpaper Program**
-</div>
+
 
 <br>
 

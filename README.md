@@ -1,6 +1,6 @@
 <div align="center">
 
-![Lumina Logo](lumina_logo.svg)
+<img src="lumina_logo.svg" alt="Lumina Logo" width="100%">
 
 ![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows)
 ![PowerShell](https://img.shields.io/badge/Made%20with-PowerShell-5391FE?style=for-the-badge&logo=powershell)
@@ -12,7 +12,7 @@
 
 <br>
 
-![Showcase](videos/showcase.gif)
+<img src="videos/showcase.gif" alt="Showcase" width="80%">
 
 </div>
 
@@ -82,7 +82,7 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 <div align="center">
 <h3>Ejemplo de Funcionamiento</h3>
-![Working Example](videos/workingexample.gif)
+<img src="videos/workingexample.gif" alt="Working Example" width="80%">
 </div>
 
 ---

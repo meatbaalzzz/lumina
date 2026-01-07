@@ -91,6 +91,4 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-<div align="center">
-<sub>Hecho con ❤️ por Certified Meatball Lover</sub>
-</div>
+

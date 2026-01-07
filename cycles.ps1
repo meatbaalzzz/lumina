@@ -1,7 +1,7 @@
 param(
-    [int]$Intervalo = 10,
+    [int]$Intervalo = 5,
     [ValidateSet("Seconds", "Minutes", "Hours")]
-    [string]$Unidad = "Minutes",
+    [string]$Unidad = "Seconds",
     [int]$TransicionCicloMs = 2000,
     [int]$TransicionCicloFps = 120,
     [int]$PollingMs = 150

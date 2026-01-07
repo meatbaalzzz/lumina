@@ -36,7 +36,7 @@ Sigue estos sencillos pasos para poner en marcha Lumina:
 
 1.  **Clona o descarga** este repositorio en tu equipo.
     ```bash
-    git clone https://github.com/tu-usuario/lumina.git
+    git clone https://github.com/meatbaalzzz/lumina.git
     ```
 2.  **Prepara tus Wallpapers**:
     - Navega a la carpeta `wallpapers` dentro del directorio del proyecto.

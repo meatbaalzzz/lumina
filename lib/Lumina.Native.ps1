@@ -87,11 +87,11 @@ public static class LuminaFade {
         _overlay.Opacity = 0;
         _overlay.Show();
 
-        // POSICIONAMIENTO Z-ORDER: En lugar de SetParent, la mandamos al fondo del todo
+        // Z-ORDER
         // Esto la pone detrás de la barra de tareas y ventanas, pero sigue siendo una ventana "libre"
         WinAPI.SetWindowPos(_overlay.Handle, WinAPI.HWND_BOTTOM, 0, 0, 0, 0, WinAPI.SWP_NOMOVE | WinAPI.SWP_NOSIZE | WinAPI.SWP_NOACTIVATE);
 
-        // FADE IN (Aparece la nueva imagen sobre el fondo actual)
+        // FADE IN
         Stopwatch sw = Stopwatch.StartNew();
         while (sw.ElapsedMilliseconds < ms) {
             _overlay.Opacity = (double)sw.ElapsedMilliseconds / ms;

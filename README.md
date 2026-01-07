@@ -12,7 +12,9 @@
 
 <br>
 
-<img src="videos/showcase.gif" alt="Showcase" width="80%">
+<a href="videos/showcase.mp4" target="_blank">
+  <img src="videos/showcase.gif" alt="Showcase" width="80%">
+</a>
 
 </div>
 
@@ -82,10 +84,9 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 4.  Push a la rama (`git push origin feature/AmazingFeature`).
 5.  Abre un Pull Request.
 
-<div align="center">
-<h3>Ejemplo de Funcionamiento</h3>
-<img src="videos/workingexample.gif" alt="Working Example" width="80%">
-</div>
+<a href="videos/workingexample.mp4" target="_blank">
+  <img src="videos/workingexample.gif" alt="Working Example" width="80%">
+</a>
 
 ---
 

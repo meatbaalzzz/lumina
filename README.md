@@ -1,12 +1,6 @@
 <div align="center">
-<pre>
-██╗     ██╗   ██╗███╗   ███╗██╗███╗   ██╗ █████╗ 
-██║     ██║   ██║████╗ ████║██║████╗  ██║██╔══██╗
-██║     ██║   ██║██╔████╔██║██║██╔██╗ ██║███████║
-██║     ██║   ██║██║╚██╔╝██║██║██║╚██╗██║██╔══██║
-███████╗╚██████╔╝██║ ╚═╝ ██║██║██║ ╚████║██║  ██║
-╚══════╝ ╚═════╝ ╚═╝     ╚═╝╚═╝╚═╝  ╚═══╝╚═╝  ╚═╝
-</pre>
+
+![Lumina Logo](lumina_logo.svg)
 
 ![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows)
 ![PowerShell](https://img.shields.io/badge/Made%20with-PowerShell-5391FE?style=for-the-badge&logo=powershell)
@@ -18,7 +12,7 @@
 
 <br>
 
-<video src="videos/showcase.mkv" controls width="80%"></video>
+![Showcase](videos/showcase.gif)
 
 </div>
 
@@ -88,7 +82,7 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 <div align="center">
 <h3>Ejemplo de Funcionamiento</h3>
-<video src="videos/workingexample.mkv" controls width="80%"></video>
+![Working Example](videos/workingexample.gif)
 </div>
 
 ---

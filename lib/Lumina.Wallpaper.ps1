@@ -21,5 +21,5 @@ function Set-LuminaWallpaperFade {
         [string]$FinalPath
     )
 
-    [LuminaOverlay]::FadeOverlay($FromPath, $ToPath, $DurationMs, $Fps, $FinalPath)
+    [LuminaFade]::FadeWallpaper($FromPath, $ToPath, $DurationMs, $Fps, $FinalPath)
 }

@@ -49,51 +49,56 @@ $lastIndex = $index
 
 try {
     while ($true) {
-        $now = Get-Date
-        if (($now - $lastRefreshAt).TotalSeconds -ge 3) {
-            $wallpapers = Get-LuminaWallpaperList -WallpaperDir $wpDir
-            if ($wallpapers.Count -gt 0) {
-                $index = $index % $wallpapers.Count
-            } else {
-                $index = 0
+        try {
+            $now = Get-Date
+            if (($now - $lastRefreshAt).TotalSeconds -ge 3) {
+                $wallpapers = Get-LuminaWallpaperList -WallpaperDir $wpDir
+                if ($wallpapers.Count -gt 0) {
+                    $index = $index % $wallpapers.Count
+                } else {
+                    $index = 0
+                }
+                $lastRefreshAt = $now
             }
-            $lastRefreshAt = $now
-        }
 
-        if ($wallpapers.Count -eq 0) {
-            Start-Sleep -Milliseconds ([Math]::Max(250, $PollingMs))
+            if ($wallpapers.Count -eq 0) {
+                Start-Sleep -Milliseconds ([Math]::Max(250, $PollingMs))
+                continue
+            }
+
+            $cycleChanged = $false
+            if ($now -ge $nextCycleAt) {
+                $index = ($index + 1) % $wallpapers.Count
+                $nextCycleAt = $now.AddSeconds($intervalSeconds)
+                $cycleChanged = $true
+            }
+
+            $currentImg = $wallpapers[$index]
+            $normalPath = $currentImg.FullName
+            $targetPath = $normalPath
+
+            $indexChanged = ($lastIndex -ne $index) -or $cycleChanged
+            $lastIndex = $index
+
+            if (-not $lastTargetPath) {
+                Set-LuminaWallpaper -Path $targetPath
+                $lastTargetPath = $targetPath
+            } elseif ($targetPath -ne $lastTargetPath) {
+                if ($indexChanged -and $TransicionCicloMs -gt 0 -and $TransicionCicloFps -gt 0) {
+                    Set-LuminaWallpaperFade -FromPath $lastTargetPath -ToPath $targetPath -DurationMs $TransicionCicloMs -Fps $TransicionCicloFps -FinalPath $targetPath
+                } else {
+                    Set-LuminaWallpaper -Path $targetPath
+                }
+                $lastTargetPath = $targetPath
+            }
+
+            Start-Sleep -Milliseconds ([Math]::Max(50, $PollingMs))
+        } catch {
+            "[{0}] {1}" -f (Get-Date).ToString("s"), $_ | Out-File -FilePath $errorLogPath -Append -Encoding utf8
+            Start-Sleep -Milliseconds 500
             continue
         }
-
-        $cycleChanged = $false
-        if ($now -ge $nextCycleAt) {
-            $index = ($index + 1) % $wallpapers.Count
-            $nextCycleAt = $now.AddSeconds($intervalSeconds)
-            $cycleChanged = $true
-        }
-
-        $currentImg = $wallpapers[$index]
-        $normalPath = $currentImg.FullName
-        $targetPath = $normalPath
-
-        $indexChanged = ($lastIndex -ne $index) -or $cycleChanged
-        $lastIndex = $index
-
-        if (-not $lastTargetPath) {
-            Set-LuminaWallpaper -Path $targetPath
-            $lastTargetPath = $targetPath
-        } elseif ($targetPath -ne $lastTargetPath) {
-            if ($indexChanged -and $TransicionCicloMs -gt 0 -and $TransicionCicloFps -gt 0) {
-                Set-LuminaWallpaperFade -FromPath $lastTargetPath -ToPath $targetPath -DurationMs $TransicionCicloMs -Fps $TransicionCicloFps -FinalPath $targetPath
-            } else {
-                Set-LuminaWallpaper -Path $targetPath
-            }
-            $lastTargetPath = $targetPath
-        }
-
-        Start-Sleep -Milliseconds ([Math]::Max(50, $PollingMs))
     }
 } catch {
     "[{0}] {1}" -f (Get-Date).ToString("s"), $_ | Out-File -FilePath $errorLogPath -Append -Encoding utf8
-    throw
 }

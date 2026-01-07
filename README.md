@@ -18,7 +18,7 @@
 
 ---
 
-## 📑 Tabla de Contenidos
+## Tabla de Contenidos
 
 - [Instalación](#-instalación)
 - [Uso](#-uso)
@@ -28,7 +28,7 @@
 
 ---
 
-## 🚀 Instalación
+## Instalación
 
 Sigue estos sencillos pasos para poner en marcha Lumina:
 
@@ -44,11 +44,13 @@ Sigue estos sencillos pasos para poner en marcha Lumina:
     - Ejecuta el archivo `lumina.vbs`.
     - ¡Listo! Lumina comenzará a gestionar tu fondo de pantalla silenciosamente en segundo plano.
 
-> **Nota:** Lumina requiere Windows y PowerShell habilitado.
-
+> **Nota:** Se recomienda crear un acceso directo del archivo `lumina.vbs` y pegarlo en la ruta de startup en Windows, 
+```files
+C:\Users\tu-usuario\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
+```
 ---
 
-## 🎮 Uso
+## Uso
 
 Lumina funciona de manera autónoma. Una vez iniciado mediante `lumina.vbs`, el script:
 - Escaneará la carpeta `wallpapers`.
@@ -59,7 +61,7 @@ Para detener Lumina, puedes buscar el proceso de PowerShell en el Administrador 
 
 ---
 
-## 🗺 Roadmap
+## Roadmap
 
 El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
@@ -70,7 +72,7 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 ---
 
-## 🤝 Contribución
+## Contribución
 
 ¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar Lumina, no dudes en hacer un fork y enviar un Pull Request.
 

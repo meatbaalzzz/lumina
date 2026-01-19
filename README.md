@@ -16,9 +16,9 @@
 
 <br>
 
-<a href="videos/showcase.mp4" target="_blank">
-  <img src="videos/showcase.gif" alt="Showcase" width="80%">
-</a>
+<video src="https://github.com/meatbaalzzz/lumina/assets/showcase.mp4" width="80%" controls autoplay loop muted>
+  Tu navegador no soporta el elemento de video.
+</video>
 
 </div>
 
@@ -91,9 +91,9 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 4.  Push a la rama (`git push origin feature/AmazingFeature`).
 5.  Abre un Pull Request.
 
-<a href="videos/workingexample.mp4" target="_blank">
-  <img src="videos/workingexample.gif" alt="Working Example" width="80%">
-</a>
+<video src="https://github.com/meatbaalzzz/lumina/assets/workingexample.mp4" width="80%" controls autoplay loop muted>
+  Tu navegador no soporta el elemento de video.
+</video>
 
 ---
 

@@ -2,6 +2,7 @@ param(
     [int]$Intervalo = 60, // Alterar este valor para cambiar el intervalo de tiempo entre cambios de wallpaper
     [ValidateSet("Seconds", "Minutes", "Hours")]
     [string]$Unidad = "Seconds",
+    [string]$Unidad = "Seconds",
     [int]$TransicionCicloMs = 2000,
     [int]$TransicionCicloFps = 120,
     [int]$PollingMs = 150

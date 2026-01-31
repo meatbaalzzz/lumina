@@ -1,14 +1,10 @@
 <div align="center">
 
-<img src="lumina_logo.svg" alt="Lumina Logo" width="100%">
-
-
-
+![Lumina Logo](lumina_logo.svg)
 
 ![Windows](https://img.shields.io/badge/Platform-Windows-0078D6?style=for-the-badge&logo=windows)
 ![PowerShell](https://img.shields.io/badge/Made%20with-PowerShell-5391FE?style=for-the-badge&logo=powershell)
 ![License](https://img.shields.io/badge/License-MIT-green?style=for-the-badge)
-
 
 <br>
 
@@ -16,15 +12,13 @@
 
 <br>
 
-<video src="https://github.com/meatbaalzzz/lumina/assets/showcase.mp4" width="80%" controls autoplay loop muted>
-  Tu navegador no soporta el elemento de video.
-</video>
+![Showcase](videos/showcase.gif)
 
 </div>
 
 ---
 
-## Tabla de Contenidos
+## 📑 Tabla de Contenidos
 
 - [Instalación](#-instalación)
 - [Uso](#-uso)
@@ -34,32 +28,27 @@
 
 ---
 
-## Instalación
+## 🚀 Instalación
 
 Sigue estos sencillos pasos para poner en marcha Lumina:
 
 1.  **Clona o descarga** este repositorio en tu equipo.
     ```bash
-    git clone https://github.com/meatbaalzzz/lumina.git
+    git clone https://github.com/tu-usuario/lumina.git
     ```
 2.  **Prepara tus Wallpapers**:
     - Navega a la carpeta `wallpapers` dentro del directorio del proyecto.
     - Añade tus imágenes favoritas en formato `.png`.
     - Lumina las detectará automáticamente.
-
-> **Nota:** Los nombres de los fondos de pantalla deben de seguir una jerarquía númerica de menor a mayor, donde el menor será el primero en mostrarse en el carrusel y el mayor el último en mostrarse. E. g. 1.png -> Primer wallpaper
-
 3.  **Inicia Lumina**:
     - Ejecuta el archivo `lumina.vbs`.
     - ¡Listo! Lumina comenzará a gestionar tu fondo de pantalla silenciosamente en segundo plano.
 
-> **Nota:** Se recomienda crear un acceso directo del archivo `lumina.vbs` y pegarlo en la ruta de startup en Windows, 
-```files
-C:\Users\tu-usuario\AppData\Roaming\Microsoft\Windows\Start Menu\Programs\Startup
-```
+> **Nota:** Lumina requiere Windows y PowerShell habilitado.
+
 ---
 
-## Uso
+## 🎮 Uso
 
 Lumina funciona de manera autónoma. Una vez iniciado mediante `lumina.vbs`, el script:
 - Escaneará la carpeta `wallpapers`.
@@ -70,7 +59,7 @@ Para detener Lumina, puedes buscar el proceso de PowerShell en el Administrador 
 
 ---
 
-## Roadmap
+## 🗺 Roadmap
 
 El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
@@ -81,7 +70,7 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 ---
 
-## Contribución
+## 🤝 Contribución
 
 ¡Las contribuciones son bienvenidas! Si tienes ideas para mejorar Lumina, no dudes en hacer un fork y enviar un Pull Request.
 
@@ -91,9 +80,10 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 4.  Push a la rama (`git push origin feature/AmazingFeature`).
 5.  Abre un Pull Request.
 
-<video src="https://github.com/meatbaalzzz/lumina/assets/workingexample.mp4" width="80%" controls autoplay loop muted>
-  Tu navegador no soporta el elemento de video.
-</video>
+<div align="center">
+<h3>Ejemplo de Funcionamiento</h3>
+![Working Example](videos/workingexample.gif)
+</div>
 
 ---
 
@@ -101,4 +91,6 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 
 Este proyecto está bajo la Licencia MIT. Consulta el archivo [LICENSE](LICENSE) para más detalles.
 
-
+<div align="center">
+<sub>Hecho con ❤️ por Certified Meatball Lover</sub>
+</div>

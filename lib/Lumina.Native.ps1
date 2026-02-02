@@ -81,38 +81,48 @@ public static class LuminaFade {
     private static LuminaOverlay _overlay;
 
     public static void FadeWallpaper(string from, string to, int ms, int fps, string final) {
-        if (_overlay == null) _overlay = new LuminaOverlay();
+        try {
+            if (_overlay == null) _overlay = new LuminaOverlay();
 
-        _overlay.ImageNext = LuminaCache.GetScaled(to);
-        _overlay.Opacity = 0;
-        _overlay.Show();
+            _overlay.ImageNext = LuminaCache.GetScaled(to);
+            _overlay.Opacity = 0;
+            _overlay.Show();
 
-        // Z-ORDER
-        // Esto la pone detrás de la barra de tareas y ventanas, pero sigue siendo una ventana "libre"
-        WinAPI.SetWindowPos(_overlay.Handle, WinAPI.HWND_BOTTOM, 0, 0, 0, 0, WinAPI.SWP_NOMOVE | WinAPI.SWP_NOSIZE | WinAPI.SWP_NOACTIVATE);
+            // Asegurar que el handle fue creado antes de continuar
+            if (_overlay.Handle == IntPtr.Zero) {
+                throw new InvalidOperationException("No se pudo crear el handle del overlay");
+            }
 
-        // FADE IN
-        Stopwatch sw = Stopwatch.StartNew();
-        while (sw.ElapsedMilliseconds < ms) {
-            _overlay.Opacity = (double)sw.ElapsedMilliseconds / ms;
-            _overlay.Refresh();
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(Math.Max(1, 1000/fps));
+            // Z-ORDER
+            WinAPI.SetWindowPos(_overlay.Handle, WinAPI.HWND_BOTTOM, 0, 0, 0, 0, WinAPI.SWP_NOMOVE | WinAPI.SWP_NOSIZE | WinAPI.SWP_NOACTIVATE);
+
+            // FADE IN
+            Stopwatch sw = Stopwatch.StartNew();
+            while (sw.ElapsedMilliseconds < ms) {
+                _overlay.Opacity = (double)sw.ElapsedMilliseconds / ms;
+                _overlay.Refresh();
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(Math.Max(1, 1000/fps));
+            }
+
+            _overlay.Opacity = 1.0;
+            LuminaWallpaper.Set(final);
+            System.Threading.Thread.Sleep(200);
+
+            // FADE OUT
+            sw.Restart();
+            while (sw.ElapsedMilliseconds < 300) {
+                _overlay.Opacity = 1.0 - ((double)sw.ElapsedMilliseconds / 300);
+                Application.DoEvents();
+                System.Threading.Thread.Sleep(10);
+            }
+
+            _overlay.Hide();
+        } catch {
+            // Si falla la transición (por ejemplo, al ejecutarse desde startup),
+            // simplemente establece el wallpaper sin animación
+            LuminaWallpaper.Set(final);
         }
-
-        _overlay.Opacity = 1.0;
-        LuminaWallpaper.Set(final);
-        System.Threading.Thread.Sleep(200);
-
-        // FADE OUT RÁPIDO
-        sw.Restart();
-        while (sw.ElapsedMilliseconds < 300) {
-            _overlay.Opacity = 1.0 - ((double)sw.ElapsedMilliseconds / 300);
-            Application.DoEvents();
-            System.Threading.Thread.Sleep(10);
-        }
-
-        _overlay.Hide();
     }
 }
 "@

@@ -80,10 +80,11 @@ El futuro de Lumina es brillante. Aquí hay algunas características planeadas:
 4.  Push a la rama (`git push origin feature/AmazingFeature`).
 5.  Abre un Pull Request.
 
-<div align="center">
-<h3>Ejemplo de Funcionamiento</h3>
-![Working Example](videos/workingexample.gif)
-</div>
+<h3 align="center">Ejemplo de Funcionamiento</h3>
+
+<p align="center">
+  <img src="videos/workingexample.gif" alt="Working Example">
+</p>
 
 ---
 
